@@ -65,6 +65,22 @@ var routes = [{
       return _interopRequireWildcard(require('@/views/collectionCategory/mens.vue'));
     });
   }
+}, {
+  path: '/collectionCategory/women',
+  name: 'WomensCategory',
+  component: function component() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('@/views/collectionCategory/women.vue'));
+    });
+  }
+}, {
+  path: '/collectionCategory/kids',
+  name: 'KidsCategory',
+  component: function component() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('@/views/collectionCategory/kids.vue'));
+    });
+  }
 }];
 var router = new _vueRouter["default"]({
   base: '/',

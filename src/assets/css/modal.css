@@ -1,0 +1,44 @@
+.vodal {
+  z-index: 100000;
+}
+
+.vodal-dialog {
+  width: 900px !important;
+  height: 450px !important;
+  box-shadow: 0 0 5px 3px #000 inset;
+}
+
+.buy_modal {
+  text-align: center;
+}
+.buy_modal .modal_title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.buy_modal .modal_wrap {
+  height: 90%;
+  padding: 20px;
+}
+.buy_modal .modal_product {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.buy_modal .modal_product .modal_img {
+  width: 180%;
+  max-width: 150px;
+  max-height: 220px;
+  overflow: hidden;
+  display: flex;
+}
+.buy_modal .modal_product .modal_img img {
+  width: 100%;
+}
+.buy_modal .modal_product .modal_product_info {
+  width: 70%;
+}
+.buy_modal form {
+  padding: 10px;
+  width: 100%;
+}

@@ -38,6 +38,16 @@ const routes = [
     component: () => import('@/views/collectionCategory/mens.vue'),
    
   },
+  {
+    path: '/collectionCategory/women',
+    name: 'WomensCategory',
+    component: () => import('@/views/collectionCategory/women.vue'),
+  },
+  {
+    path: '/collectionCategory/kids',
+    name: 'KidsCategory',
+    component: () => import('@/views/collectionCategory/kids.vue'),
+  },
 ]
 
 const router = new VueRouter({

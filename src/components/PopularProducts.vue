@@ -1,21 +1,26 @@
 <template>
-  <div class="man_wrap">
-    <div class="clth_title">Men's collection:</div>
+  <div class="container popular_prod_padding">
+    <div class="colection">Popular:</div>
     <div class="shop_list">
-      <div class="shop_box" v-for="item in men_list" :key="item.id">
+      <div class="shop_box" v-for="item in popular_list" :key="item.id">
         <div class="img_title">
           <div class="img_wrap">
             <img :src="item.image" :alt="item.title" />
           </div>
         </div>
         <div class="product_info">
-          <h3>{{ item.title.substr(0, 22) }}</h3>
+          <h3>{{ item.title.substr(0, 26) }}</h3>
           <div class="price">{{ item.price }}$</div>
           <button type="button" class="btnn" @click="detail(item.id)">
-            Buy
+            BUY
           </button>
         </div>
       </div>
+    </div>
+    <div class="more_products">
+      <router-link class="btnn" :to="'Collections'"
+        ><span>View all Collections &#8594;</span></router-link
+      >
     </div>
 
     <vodal
@@ -73,28 +78,52 @@
 </template>
 
 <style lang="scss">
-.man_wrap {
+.popular_prod_padding {
+  padding: 100px 0 30px;
   text-align: center;
-  padding: 120px 0 80px;
+}
+.colection {
+  font-size: 40px;
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 20px;
+}
+.shop_list {
+  margin-bottom: 20px;
 }
 </style>
 
 <script>
 const dataaa = require("@/assets/clothes.json");
+
+import Vue from "vue";
+import Vodal from "vodal";
+
+import "vodal/common.css";
+import "vodal/rotate.css";
+
+Vue.component(Vodal.name, Vodal);
+import "@/assets/css/modal.min.css";
+
 export default {
   data() {
     return {
       show: false,
       list: [],
-      men_list: [],
+      popular_list: [],
       details: [],
     };
   },
   created() {
-    // this.list = dataaa;
-    for (let i of dataaa) {
+    this.list = dataaa;
+    for (let i of this.list) {
+      if (i.category == "women's clothing") {
+        if (this.popular_list.length > 3) this.popular_list.length = 3;
+        this.popular_list.push(i);
+      }
       if (i.category == "men's clothing") {
-        this.men_list.push(i);
+        if (this.popular_list.length > 6) this.popular_list.length = 6;
+        this.popular_list.push(i);
       }
     }
   },

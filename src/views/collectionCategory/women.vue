@@ -1,8 +1,8 @@
 <template>
-  <div class="man_wrap">
-    <div class="clth_title">Men's collection:</div>
+  <div class="woman_wrap">
+    <div class="clth_title">Women's collection:</div>
     <div class="shop_list">
-      <div class="shop_box" v-for="item in men_list" :key="item.id">
+      <div class="shop_box" v-for="item in women_list" :key="item.id">
         <div class="img_title">
           <div class="img_wrap">
             <img :src="item.image" :alt="item.title" />
@@ -73,7 +73,7 @@
 </template>
 
 <style lang="scss">
-.man_wrap {
+.woman_wrap {
   text-align: center;
   padding: 120px 0 80px;
 }
@@ -86,15 +86,15 @@ export default {
     return {
       show: false,
       list: [],
-      men_list: [],
+      women_list: [],
       details: [],
     };
   },
   created() {
-    // this.list = dataaa;
-    for (let i of dataaa) {
-      if (i.category == "men's clothing") {
-        this.men_list.push(i);
+    this.list = dataaa;
+    for (let i of this.list) {
+      if (i.category == "women's clothing") {
+        this.women_list.push(i);
       }
     }
   },

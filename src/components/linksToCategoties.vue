@@ -8,7 +8,7 @@
         <div class="description">
           <h3>MIND AND Seduction</h3>
           <div class="clothes_link">SPRING IMAGES</div>
-          <router-link to="collections" class="btnn"
+          <router-link to="collectionCategory/women" class="btnn"
             >To the women's department &rarr;</router-link
           >
         </div>

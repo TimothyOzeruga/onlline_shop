@@ -5,21 +5,21 @@
         <h5>BLOG STORIES</h5>
         <h2>Check Our News</h2>
       </div>
-      <div class="blog_list">
+      <!-- <div class="blog_list">
         <div class="blog-box" v-for="item in cutItems()" :key="item.id">
           <router-link :to="'blog/' + item.id">
             <img :src="item.image" :alt="item.title" />
             <h3>{{ item.title }}</h3>
           </router-link>
         </div>
-        <!-- <div class="blog-box" v-for="item in list_itemsss" :key="item.id">
+      </div> -->
+      <div class="blog_list">
+        <div class="blog-box" v-for="item in list_blog" :key="item.id">
           <router-link :to="'blog/' + item.id">
-            <div class="img_wrap">
-              <img :src="item.image" :alt="item.text" />
-            </div>
-            <h3>{{ item.text }}</h3>
+            <img :src="item.image" :alt="item.title" />
+            <h3>{{ item.title }}</h3>
           </router-link>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
@@ -70,64 +70,42 @@
 </style>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
+
+const blogData = require("@/assets/blog.json");
 
 export default {
   name: "blog_list",
   data() {
     return {
       list_item: [],
-      list_itemsss: [],
+      list: [],
+      list_blog: [],
       limit: 21,
     };
   },
   created() {
-    axios.get("https://jsonplaceholder.typicode.com/photos").then((resp) => {
-      this.list_itemsss = resp.data;
-    });
+    this.list = blogData;
+    for (let i of this.list) {
+      this.list_blog.push(i);
+    }
   },
-  mounted() {
-    axios.get("https://jsonplaceholder.typicode.com/posts").then((resp) => {
-      this.list_item = resp.data;
-    });
-    //   const options = {
-    //     method: "GET",
-    //     url: "https://dummyapi.io/data/api/post?limit=10/60d0fe4f5311236168a109ca",
-    //     headers: {
-    //       "app-id": "60e6fab9a1aa7dc2336930cf",
-    //     },
-    //   };
-
-    //   axios.request(options).then((resp) => {
-    //     this.list_itemsss = resp.data.data;
-    //   });
-  },
-  methods: {
-    cutItems() {
-      let rez = [];
-      for (let i = 0; i < this.limit; i++) {
-        this.list_item[i].image =
-          "https://via.placeholder.com/350/0000FF/?text=" +
-          this.list_item[i].title.substr(0, 25);
-        rez.push(this.list_item[i]);
-      }
-      return rez;
-    },
-  },
-  //   methods: {
-  //     cutItems() {
-  //       let rez = [];
-  //       for (let j = 0; j < this.list_itemsss; j++) {
-  //         for (let i = 0; i < this.limit; i++) {
-  //           console.log(this.list_itemsss[j]);
-  //           this.list_item[i].image =
-  //             "https://via.placeholder.com/350/0000FF/FFFFFF/?text=" +
-  //             this.list_item[i].title.substr(0, 25);
-  //           rez.push(this.list_item[i]);
-  //         }
-  //       }
-  //       return rez;
-  //     },
+  // mounted() {
+  //   axios.get("https://jsonplaceholder.typicode.com/posts").then((resp) => {
+  //     this.list_item = resp.data;
+  //   });
+  // },
+  // methods: {
+  //   cutItems() {
+  //     let rez = [];
+  //     for (let i = 0; i < this.limit; i++) {
+  //       this.list_item[i].image =
+  //         "https://via.placeholder.com/350/0000FF/?text=" +
+  //         this.list_item[i].title.substr(0, 25);
+  //       rez.push(this.list_item[i]);
+  //     }
+  //     return rez;
   //   },
+  // },
 };
 </script>
