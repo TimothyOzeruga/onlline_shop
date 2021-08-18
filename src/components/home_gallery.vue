@@ -33,9 +33,6 @@
     
 <style lang="scss">
 .bg_gallery {
-  background: url("https://st.depositphotos.com/1027431/2529/i/600/depositphotos_25299009-stock-photo-white-silk-background.jpg")
-    no-repeat;
-  background-size: cover;
   padding: 100px 0 50px;
 }
 .gallery {
@@ -47,14 +44,26 @@
     width: calc(50% - 10px);
     margin-bottom: 20px;
 
-    &:hover {
-      cursor: pointer;
-      opacity: 0.7;
-    }
-
     img {
       width: 100%;
     }
   }
 }
+@media screen and (max-width: 650px) {
+  .bg_gallery {
+    padding-top: 50px;
+  }
+  .gallery {
+    flex-direction: column;
+    align-items: center;
+
+    .gallery_img {
+      width: 90%;
+    }
+  }
+}
 </style>
+
+<script>
+export default {};
+</script>

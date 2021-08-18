@@ -1,42 +1,29 @@
 <template>
   <div class="blog blog_detail">
     <div class="container">
-      <!-- <h1>Article Title</h1> -->
-      <div class="row">
-        <h2>{{ item.title }}</h2>
-        <hr />
-        <div>{{ item.body }}</div>
+      <div class="blog_wrap">
+        <div class="blog_details">
+          <h2>{{ list_blog.title }}</h2>
+          <div class="description">{{ list_blog.description }}</div>
+          <div class="author">{{ list_blog.author }}</div>
+          <div class="date">{{ list_blog.date }}</div>
+        </div>
+        <div class="blog_img_wrap">
+          <img :src="list_blog.image" :alt="list_blog.title" />
+        </div>
       </div>
+      <hr />
+
       <div class="coments">Comments:</div>
       <blogComments class="blog_comments" :blog_id="id"></blogComments>
     </div>
   </div>
 </template>
 
-<style lang="scss">
-.blog {
-  padding-top: 160px;
-}
-.row {
-  margin-bottom: 50px;
-
-  h2 {
-    text-transform: uppercase;
-  }
-}
-.coments {
-  font-size: 30px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-.blog_comments {
-  margin-bottom: 40px;
-}
-</style>
 
 <script>
-import axios from "axios";
 import blogComments from "@/components/blog_comments.vue";
+const blogData = require("@/assets/blog.json");
 
 export default {
   name: "blog_detail",
@@ -45,36 +32,86 @@ export default {
   },
   data() {
     return {
-      //   id: this.$route.params.id,
       id: 0,
       item: {},
+      list_blog: [],
     };
   },
   created() {
     this.id = this.$route.params.id;
-  },
-  mounted() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts/" + this.id)
-      .then((resp) => {
-        this.item = resp.data;
-        console.log(this.item);
-      });
-
-    // axios
-    //   .get("https://dummyapi.io/data/api/post/" + this.id + "/comment?limit=10")
-    //   .then((resp) => {
-    //     this.item = resp.data;
-    //     console.log(this.item);
-    //   });
-
-    // axios
-    //   .get(
-    //     "https://newsapi.org/v2/everything?q=apple&from=2021-07-07&to=2021-07-07&sortBy=popularity&apiKey=1b6df4931c854c21bc9840d2c55e4d66"
-    //   )
-    //   .then((resp) => {
-    //     console.log(resp.data);
-    //   });
+    this.item = blogData;
+    for (let i of this.item) {
+      if (i.id == this.id) {
+        this.list_blog = i;
+      }
+    }
   },
 };
 </script>
+
+
+
+
+<style lang="scss">
+.blog {
+  padding-top: 160px;
+  background: url("https://st.depositphotos.com/1027431/2529/i/600/depositphotos_25299009-stock-photo-white-silk-background.jpg")
+    no-repeat;
+  background-size: cover;
+}
+
+.blog_wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+
+  .blog_details {
+    width: 48%;
+    font-weight: 700;
+    h2 {
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+    .description {
+      font-weight: 400;
+      padding-right: 30px;
+      margin-bottom: 40px;
+    }
+    .author {
+      margin-bottom: 6px;
+    }
+  }
+  .blog_img_wrap {
+    width: 48%;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.coments {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 40px 0 20px;
+}
+.blog_comments {
+  margin-bottom: 40px;
+}
+
+@media (max-width: 900px) {
+  .blog_wrap {
+    flex-direction: column;
+    align-items: center;
+
+    .blog_details {
+      width: 90%;
+      margin-bottom: 30px;
+    }
+    .blog_img_wrap {
+      width: 70%;
+    }
+  }
+}
+</style>

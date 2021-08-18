@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     initMap() {
-      this.map = L.map("mapContainer").setView(this.centerCoordinates, 13);
+      this.map = L.map("mapContainer").setView(this.centerCoordinates, 14);
       this.tileLayer = L.tileLayer(
         "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
         {
@@ -58,9 +58,15 @@ export default {
         northEast = L.latLng(51.505, -0.09);
       let bounds = L.latLngBounds(southWest, northEast);
 
+      this.map.scrollWheelZoom.disable();
       this.map.setMaxBounds(bounds);
       this.map.on("drag", function () {
         this.map.panInsideBounds(bounds, { animate: false });
+      });
+      this.map.on("click", function () {
+        if (this.map.scrollWheelZoom.disable()) {
+          this.map.scrollWheelZoom.enable();
+        }
       });
     },
   },
@@ -70,35 +76,11 @@ export default {
 <style lang='scss'>
 #mapContainer {
   cursor: default;
-  width: 100%;
-  height: 500px;
+  width: 48%;
+  height: 320px;
   border: 1px solid #999;
-  margin-top: 50px;
+
   position: relative;
   z-index: 8;
-  //   img {
-  //     width: 100%;
-  //     height: 100%;
-  //     object-fit: cover;
-  //   }
 }
-// #map_link {
-//   display: block;
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   left: 0;
-//   top: 0;
-//   background-color: rgba(0, 0, 0, 0.7);
-//   color: #fff;
-//   text-align: center;
-//   line-height: 500px;
-//   font-size: 24px;
-//   text-decoration: none;
-//   opacity: 0;
-//   transition: all 0.2s ease;
-//   &:hover {
-//     opacity: 1;
-//   }
-// }
 </style>

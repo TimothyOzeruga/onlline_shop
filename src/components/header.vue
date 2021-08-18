@@ -2,13 +2,12 @@
   <header>
     <div id="mobile_menu_block">
       <div class="mmb_top">
-        <div class="mmb_logo">
-          <img
-            src="https://static-sl.insales.ru/files/1/2933/14871413/original/Group_8.svg"
-            alt="mobile logo"
-          />
-        </div>
-        <button class="hamburger hamburger--elastic" type="button">
+        <div class="mmb_logo">MONO</div>
+        <button
+          @click="close"
+          class="hamburger hamburger--elastic"
+          type="button"
+        >
           <span class="hamburger-box">
             <span class="hamburger-inner"></span>
           </span>
@@ -16,22 +15,24 @@
       </div>
       <nav class="mobile_menu">
         <ul>
-          <li class="menu_item">
+          <li class="menu_item" @click="close">
             <router-link to="/" class="item_link">Home</router-link>
           </li>
-          <li class="menu_item">
-            <router-link to="/about" class="item_link">Collections</router-link>
+          <li class="menu_item" @click="close">
+            <router-link to="/collections" class="item_link"
+              >Collections</router-link
+            >
           </li>
-          <li class="menu_item">
+          <li class="menu_item" @click="close">
             <router-link to="/blog" class="item_link">Blog</router-link>
           </li>
-          <li class="menu_item">
+          <li class="menu_item" @click="close">
             <router-link to="/contacts" class="item_link">Contacts</router-link>
           </li>
         </ul>
       </nav>
       <ul class="mobile_soc_list">
-        <li>
+        <li @click="close">
           <a
             href="https://www.facebook.com/"
             class="facebook"
@@ -40,7 +41,7 @@
             ><i class="icon-facebook"></i
           ></a>
         </li>
-        <li>
+        <li @click="close">
           <a
             href="https://twitter.com/"
             class="twitter"
@@ -49,7 +50,7 @@
             ><i class="icon-twitter"></i
           ></a>
         </li>
-        <li>
+        <li @click="close">
           <a
             href="https://www.instagram.com/"
             class="instagram"
@@ -60,7 +61,7 @@
         </li>
       </ul>
     </div>
-    <div id="menu_shadow"></div>
+    <div id="menu_shadow" @click="close"></div>
     <div class="header">
       <div class="header_container">
         <div class="logo">
@@ -117,7 +118,11 @@
             ></a>
           </li>
         </ul>
-        <button class="hamburger hamburger--elastic" type="button">
+        <button
+          @click="mobMenu"
+          class="hamburger hamburger--elastic"
+          type="button"
+        >
           <span class="hamburger-box">
             <span class="hamburger-inner"></span>
           </span>
@@ -152,42 +157,26 @@
 </style>
 
 <script>
-import jQuery from "jquery";
-const $ = jQuery;
-window.$ = $;
-
 export default {
   name: "siteHeader",
 
   data() {
     return {
       show: false,
+      isOpenMobMenu: false,
     };
   },
-  created() {
-    // $(window).scroll(function () {
-    //   if ($(window).scrollTop() > 80) {
-    //     $(".header").addClass("fixed");
-    //   } else {
-    //     $(".header").removeClass("fixed");
-    //   }
-    // });
-
-    $(".hamburger, #menu_shadow").click(function () {
-      $(".hamburger").toggleClass("is-active");
-      $("body").toggleClass("open");
-    });
-
-    $(".mobile_menu a").click(function () {
-      $(".hamburger").removeClass("is-active");
-      $("body").removeClass("open");
-    });
-
-    // $(".item_link").click(function (e) {
-    //   e.preventDefault();
-    //   let top = $($(this).attr("href")).offset().top;
-    //   $("html, body").animate({ scrollTop: top }, 600);
-    // });
+  methods: {
+    mobMenu() {
+      this.isOpenMobMenu = true;
+      document.body.classList.add("open");
+      document.querySelector(".hamburger").classList.add("is-active");
+    },
+    close() {
+      this.isOpenMobMenu = false;
+      document.body.classList.remove("open");
+      document.querySelector(".hamburger").classList.remove("is-active");
+    },
   },
 };
 </script>

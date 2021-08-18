@@ -122,6 +122,16 @@ footer {
 h6 {
   color: #fff;
 }
+
+@media screen and (max-width: 450px) {
+  .contact-nav {
+    flex-direction: column;
+
+    li {
+      margin: 0 0 10px;
+    }
+  }
+}
 </style>
 
 <script>

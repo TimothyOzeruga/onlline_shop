@@ -1,8 +1,8 @@
 module.exports = {
-	configureWebpack: config =>{
-		config.optimization = {
-			minimize: false
-		}     
-	}, 
-	 publicPath:  process.env.NODE_ENV === 'production'?'/final-project/':'/'
+	// configureWebpack: config =>{
+	// 	config.optimization = {
+	// 		minimize: false
+	// 	}     
+	// }, 
+	 publicPath: '/final-project/'
 }

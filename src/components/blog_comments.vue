@@ -9,7 +9,7 @@
               alt=""
             />
           </div>
-          <p>{{ item.email }}</p>
+          <div class="email">{{ item.email }}</div>
         </div>
         <div class="comment">
           <h5>{{ item.name }}</h5>
@@ -25,12 +25,12 @@
   display: flex;
   justify-content: space-between;
   padding: 20px;
-  border: 2px solid #000;
-  box-shadow: 0 0 5px 3px #000 inset;
-  margin-bottom: 10px;
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.7);
+  margin-bottom: 15px;
+  border-radius: 5px;
 }
 .user_data {
-  width: 20%;
+  width: 25%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,7 +39,7 @@
   &::after {
     content: "";
     display: block;
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.575);
     width: 1px;
     height: 128%;
     position: absolute;
@@ -48,7 +48,7 @@
   }
 }
 .comment {
-  width: 75%;
+  width: 70%;
 
   h5 {
     font-size: 20px;
@@ -59,8 +59,45 @@
 .user_pic {
   width: 120px;
   margin-bottom: 10px;
-  border: 1px solid #000;
+
+  display: flex;
+  justify-content: center;
   img {
+    width: 100%;
+    border: 1px solid #000;
+    border-radius: 50%;
+  }
+}
+.email {
+  font-size: 14px;
+  margin: 0 auto;
+}
+@media (max-width: 1140px) {
+  .comment_item {
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  .user_data {
+    width: 100%;
+    margin-bottom: 30px;
+    &::after {
+      display: none;
+    }
+    &::before {
+      content: "";
+      display: block;
+      background-color: rgba(0, 0, 0, 0.575);
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+    }
+  }
+  .comment {
     width: 100%;
   }
 }

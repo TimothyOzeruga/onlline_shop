@@ -33,9 +33,6 @@
 
 <style lang="scss">
 .first_screem_bg {
-  background: url("https://st.depositphotos.com/1027431/2529/i/600/depositphotos_25299009-stock-photo-white-silk-background.jpg")
-    no-repeat;
-  background-size: cover;
   padding: 160px 0 100px;
 }
 .main_slider {
@@ -43,14 +40,13 @@
   margin: auto;
 
   .slide_item {
-    height: 500px;
+    width: 100%;
     position: relative;
     &:hover {
       opacity: 0.8;
     }
     img {
       width: 100%;
-      transform: translateY(-80px);
     }
   }
 
@@ -61,6 +57,7 @@
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
+    top: 45%;
   }
   .slick-prev {
     -webkit-transform: rotate(135deg);
@@ -78,6 +75,26 @@
     right: -50px;
     &::before {
       display: none;
+    }
+  }
+}
+@media screen and (max-width: 950px) {
+  .first_screem_bg {
+    padding: 100px 0 60px;
+  }
+  .main_slider {
+    .slick-prev {
+      left: -30px;
+    }
+    .slick-next {
+      right: -30px;
+    }
+  }
+}
+@media screen and (max-width: 450px) {
+  .main_slider {
+    .slick-arrow {
+      display: none !important;
     }
   }
 }

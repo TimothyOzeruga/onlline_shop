@@ -1,10 +1,9 @@
 <template>
   <div class="contacts_wrapper">
-    <div class="blackbox blackbox2" style="margin-bottom: 20px">
+    <div class="blackbox blackbox2">
       <div class="text">GET DISCOUNTS AND GIFTS</div>
       <form class="sub" id="sub_form" @submit.prevent="sendData">
         <div class="form_row">
-          <label for="email" class="form-label"></label>
           <input
             id="email"
             name="email"
@@ -14,6 +13,7 @@
             @blur="isEmailTouched = true"
             :class="{ error: isEmailError }"
           />
+          <label for="email" class="form-label"></label>
           <div class="error_div" v-if="isEmailError">Invalid Email</div>
         </div>
         <button :disabled="!isEmailValid" type="submit" class="btnn btn_sub">
@@ -23,6 +23,92 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+
+const emailCheckRegex =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+export default {
+  data() {
+    return {
+      email: "",
+      isEmailTouched: false,
+    };
+  },
+  computed: {
+    isEmailValid() {
+      return emailCheckRegex.test(this.email);
+    },
+
+    isEmailError() {
+      return !this.isEmailValid && this.isEmailTouched;
+    },
+  },
+
+  methods: {
+    sendData() {
+      const BOT_TOKEN = "1868758005:AAFgwAos7OsqEj3SOED9FgCKKspGO5USmGQ";
+      const CHAT_ID = "-1001207500168";
+      const text = "Email: " + this.email;
+      axios
+        .get(
+          "https://api.telegram.org/bot" +
+            BOT_TOKEN +
+            "/sendMessage?chat_id=" +
+            CHAT_ID +
+            "&text=" +
+            text
+        )
+        .then((resp) => {
+          if (resp.data.ok === true) {
+            topPanel.success("Your data has been sent", true);
+            this.email = "";
+            this.isEmailTouched = false;
+          } else {
+            topPanel.warning("error", true);
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+
+      const topPanel = {
+        success(text = "Some text here", autoclose = true) {
+          this.showPanel(text, "success", autoclose);
+        },
+        warning(text = "Some text here", autoclose = false) {
+          this.showPanel(text, "warning", autoclose);
+        },
+        showPanel(text, type, autoclose) {
+          let btn = autoclose
+            ? ""
+            : '<button onclick="topPanel.closePanel()>&times;</button>';
+          let h = `<div id="top_panel" class="panel_${type}">
+              <p>${text}</p>${btn}<div></div>`;
+          if (document.getElementById("top_panel") !== null) {
+            this.closePanel();
+          }
+          document
+            .getElementsByTagName("body")[0]
+            .insertAdjacentHTML("afterbegin", h);
+          if (autoclose) {
+            const _this = this;
+            setTimeout(function () {
+              _this.closePanel();
+            }, 3000);
+          }
+        },
+        closePanel() {
+          document.getElementById("top_panel").remove();
+        },
+      };
+    },
+  },
+};
+</script>
+
 
 <style lang="scss">
 .form_row {
@@ -38,7 +124,7 @@
   height: 20px;
 }
 .error {
-  border-color: red;
+  border-color: red !important;
 }
 .blackbox2 {
   text-align: center;
@@ -55,12 +141,13 @@
       width: 250px;
       padding: 10px;
       color: #000;
+      outline: none;
 
       &::placeholder {
         color: #000;
       }
       &:focus {
-        background-color: rgba(219, 216, 216);
+        background-color: rgb(202, 202, 202);
       }
     }
   }
@@ -77,6 +164,30 @@
     }
   }
 }
+@media screen and (max-width: 450px) {
+  .blackbox2 {
+    .sub {
+      flex-direction: column;
+    }
+    .form_row {
+      margin-right: 0;
+      margin-bottom: 20px;
+
+      input {
+        width: 100%;
+      }
+    }
+    .btn_sub {
+      width: 50%;
+      margin: 0 auto;
+    }
+  }
+  .error_div {
+    top: 110% !important;
+    font-size: 16px !important;
+  }
+}
+/* */
 
 #top_panel {
   position: fixed;
@@ -112,88 +223,3 @@
   background-color: rgba(235, 166, 13, 0.8);
 }
 </style>
-
-<script>
-import axios from "axios";
-
-const emailCheckRegex =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-export default {
-  data() {
-    return {
-      email: "",
-      isEmailTouched: false,
-    };
-  },
-  computed: {
-    isEmailValid() {
-      return emailCheckRegex.test(this.email);
-    },
-
-    isEmailError() {
-      return !this.isEmailValid && this.isEmailTouched;
-    },
-  },
-
-  methods: {
-    sendData() {
-      const topPanel = {
-        success(text = "Some text here", autoclose = true) {
-          this.showPanel(text, "success", autoclose);
-        },
-        warning(text = "Some text here", autoclose = false) {
-          this.showPanel(text, "warning", autoclose);
-        },
-        showPanel(text, type, autoclose) {
-          let btn = autoclose
-            ? ""
-            : '<button onclick="topPanel.closePanel()>&times;</button>';
-          let h = `<div id="top_panel" class="panel_${type}">
-              <p>${text}</p>${btn}<div></div>`;
-          if (document.getElementById("top_panel") !== null) {
-            this.closePanel();
-          }
-          document
-            .getElementsByTagName("body")[0]
-            .insertAdjacentHTML("afterbegin", h);
-          if (autoclose) {
-            const _this = this;
-            setTimeout(function () {
-              _this.closePanel();
-            }, 3000);
-          }
-        },
-        closePanel() {
-          document.getElementById("top_panel").remove();
-        },
-      };
-      const BOT_TOKEN = "1868758005:AAFgwAos7OsqEj3SOED9FgCKKspGO5USmGQ";
-      const CHAT_ID = "-1001207500168";
-      const text = "Email: " + this.email;
-      axios
-        .get(
-          "https://api.telegram.org/bot" +
-            BOT_TOKEN +
-            "/sendMessage?chat_id=" +
-            CHAT_ID +
-            "&text=" +
-            text
-        )
-        .then((resp) => {
-          console.log(resp.data.ok);
-          if (resp.data.ok === true) {
-            topPanel.success("Your data has been sent", true);
-            this.email = "";
-            this.isEmailTouched = false;
-          } else {
-            topPanel.warning("error", true);
-          }
-        })
-        .catch((err) => {
-          alert(err);
-        });
-    },
-  },
-};
-</script>

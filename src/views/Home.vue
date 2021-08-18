@@ -24,6 +24,11 @@
 
 <style lang='scss'>
 /* */
+.home {
+  background: url("https://st.depositphotos.com/1027431/2529/i/600/depositphotos_25299009-stock-photo-white-silk-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .container {
   width: 90%;
   max-width: 1170px;
@@ -45,7 +50,7 @@
   .text {
     font-size: 30px;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     span {
       font-weight: 400;
@@ -64,7 +69,6 @@
   flex-wrap: wrap;
   justify-content: center;
   column-gap: 25px;
-  // padding: 0 100px;
 }
 .shop_box {
   padding-bottom: 20px;
@@ -78,8 +82,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  // border: 2px solid #000;
-  // box-shadow: 0 0 5px 3px #000 inset;
   box-shadow: 0 0 5px 3px rgb(161, 161, 161);
 
   &:hover {

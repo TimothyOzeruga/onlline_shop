@@ -142,7 +142,7 @@
   margin-bottom: 30px;
 }
 .mobile_menu li {
-  border-bottom: 1px solid #35008b;
+  border-bottom: 1px solid #201b27;
 }
 .mobile_menu li a {
   display: inline-block;
@@ -155,7 +155,7 @@
   width: 100%;
 }
 .mobile_menu li a:hover {
-  background-color: #35008b;
+  background-color: #21212e;
   color: #fff;
 }
 
@@ -176,8 +176,8 @@
   background-color: transparent;
   position: absolute;
   top: -11px;
-  left: -9px;
-  border: #35008b solid 1px;
+  left: -10px;
+  border: #060236 solid 1px;
   border-radius: 50%;
 }
 
@@ -185,8 +185,11 @@
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  background-color: #a099bb;
+  background-color: #000000;
 }
 .mmb_top .mmb_logo {
   display: flex;
+  font-size: 50px;
+  font-weight: 700;
+  color: #fff;
 }
