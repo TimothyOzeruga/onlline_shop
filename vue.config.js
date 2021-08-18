@@ -4,5 +4,5 @@ module.exports = {
 	// 		minimize: false
 	// 	}     
 	// }, 
-	 publicPath: '/final-project/'
+	 publicPath: '/onlline_shop/'
 }
